@@ -78,11 +78,9 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--heading); margin: 0; }
 
 /* ---------- Trang chủ ---------- */
 .home-top { display: flex; justify-content: space-between; align-items: center; padding: calc(env(safe-area-inset-top) + 12px) 20px 0; max-width: 560px; margin: 0 auto; }
-.th-brand { display: flex; align-items: center; gap: 8px; border: 0; background: none; padding: 0; text-align: left; min-width: 0; }
-.th-brand img { width: 46px; height: 46px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,.25); flex: none; }
-.th-brand span { display: flex; flex-direction: column; line-height: 1.1; padding: 5px 12px 5px 10px; border-radius: 12px; background: rgba(255,255,255,.72); box-shadow: 0 1px 4px rgba(0,0,0,.1); }
-.th-brand small { font-size: 0.66rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-dark); font-weight: 600; }
-.th-brand b { font-family: var(--font-head); font-size: 1.02rem; color: var(--navy); letter-spacing: .5px; text-transform: uppercase; }
+.th-brand { border: 0; background: none; padding: 0; border-radius: 50%; line-height: 0; }
+.th-brand img { width: 54px; height: 54px; border-radius: 50%; box-shadow: 0 3px 10px rgba(0,0,0,.28); }
+.th-brand:active { transform: scale(0.95); }
 .top-icons { display: flex; gap: 8px; }
 .round-btn { width: 42px; height: 42px; border-radius: 50%; border: 0; background: rgba(255,255,255,.75); font-size: 1.15rem; box-shadow: 0 1px 4px rgba(0,0,0,.12); }
 .brand { text-align: center; margin-top: 2px; }

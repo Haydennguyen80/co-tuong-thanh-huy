@@ -1,5 +1,5 @@
 // Service worker: lưu app để mở được cả khi không có mạng (trừ phần đánh online).
-const VERSION = 'co-tien-v1.2.0';
+const VERSION = 'co-tien-v1.2.1';
 const CORE = [
   './', './index.html', './manifest.webmanifest', './css/app.css',
   './js/app.js', './js/xiangqi.js', './js/engine.js', './js/engine-worker.js', './js/engine-client.js',
