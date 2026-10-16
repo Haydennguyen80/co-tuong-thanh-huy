@@ -60,7 +60,7 @@ export const music = {
   setVolume(v) { volume = v; if (player) player.setVolume(v); },
   start() {
     const a = ac(); if (!a || player) return;
-    player = new ZenMusic(a, a.destination, volume);
+    player = new ZenMusic(a, a.destination, volume, Math.floor(Math.random() * 1000));
     player.start();
   },
   stop() {
