@@ -13,7 +13,7 @@ import { mountScene, bellSVG } from './scene.js';
 import { OnlineSession, makeRoomCode, roomLink } from './online.js';
 import { PUZZLES, PUZZLE_GROUPS } from './puzzles.js';
 
-const APP_VERSION = '1.1.0';
+const APP_VERSION = '1.2.0';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
