@@ -53,8 +53,10 @@
           <span class="ic">▶</span><span><b>Tiếp tục ván đang chơi</b><small id="resume-info"></small></span>
         </button>
         <div class="install-card hidden" id="install-card">
-          <span>📲 Cài app lên màn hình chính để mở nhanh như app thật.</span>
+          <span class="ic">📲</span>
+          <span class="txt"><b>Cài Cờ Tiên lên máy</b><small>Mở nhanh như app thật, chơi với máy cả khi không có mạng</small></span>
           <button class="btn small gold" id="btn-install" type="button">Cài app</button>
+          <button class="ins-x" id="install-close" type="button" aria-label="Ẩn">×</button>
         </div>
         <div class="menu-grid">
           <button class="menu-big red" data-go="setup-ai" type="button"><span class="ic">🤖</span><b>Đánh với máy</b><small>Có Thầy tư vấn từng nước</small></button>
@@ -336,10 +338,9 @@
           <div class="field"><input id="st-peer" placeholder="peer.ten-cua-ban.com" inputmode="url"></div>
         </div>
         <div class="card">
-          <h3>Cài app lên điện thoại</h3>
-          <p><b>iPhone (Safari):</b> bấm nút Chia sẻ <span class="kbd">⬆</span> → chọn <b>“Thêm vào MH chính”</b>.</p>
-          <p><b>Samsung / Android (Chrome):</b> bấm <span class="kbd">⋮</span> → <b>“Thêm vào màn hình chính”</b> hoặc <b>“Cài đặt ứng dụng”</b>.</p>
-          <p><b>Máy tính (Chrome/Edge):</b> bấm biểu tượng cài đặt ở thanh địa chỉ.</p>
+          <h3>📲 Cài app lên điện thoại / laptop</h3>
+          <p class="muted" id="st-install-state">Cài xong, Cờ Tiên có biểu tượng riêng và chơi được cả khi không có mạng.</p>
+          <button class="btn gold" id="btn-install-2" type="button">Hướng dẫn cài app</button>
         </div>
         <p class="muted center" id="app-version"></p>
       </div>

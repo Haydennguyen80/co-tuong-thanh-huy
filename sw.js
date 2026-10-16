@@ -1,10 +1,10 @@
 // Service worker: lưu app để mở được cả khi không có mạng (trừ phần đánh online).
-const VERSION = 'co-tien-v1.3.0';
+const VERSION = 'co-tien-v1.4.0';
 const CORE = [
   './', './index.html', './manifest.webmanifest', './css/app.css',
   './js/app.js', './js/xiangqi.js', './js/engine.js', './js/engine-worker.js', './js/engine-client.js',
   './js/notation.js', './js/game.js', './js/coach.js', './js/board.js', './js/clock.js', './js/storage.js',
-  './js/sound.js', './js/scene.js', './js/zen-music.js', './js/online.js', './js/puzzles.js', './js/vendor/peerjs.min.js',
+  './js/sound.js', './js/scene.js', './js/zen-music.js', './js/install.js', './js/vendor/qrcode.mjs', './js/online.js', './js/puzzles.js', './js/vendor/peerjs.min.js',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/favicon-64.png',
   './icons/logo-ngang-toi.png', './icons/logo-ngang-sang.png', './icons/logo-symbol.svg', './icons/thanh-huy-logo-160.png',
 ];

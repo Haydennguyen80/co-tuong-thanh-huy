@@ -119,7 +119,23 @@ h1, h2, h3 { font-family: var(--font-head); color: var(--heading); margin: 0; }
   width: 100%; display: flex; align-items: center; gap: 12px; padding: 12px 14px; text-align: left;
   background: var(--surface); border: 2px solid var(--gold); border-radius: var(--radius); box-shadow: var(--shadow); color: var(--text);
 }
-.install-card { justify-content: space-between; border-style: dashed; }
+.install-card { position: relative; border-style: solid; background: linear-gradient(135deg, #FFF7E2, #FFFDF6); padding-right: 34px; }
+.install-card .ic { font-size: 1.9rem; flex: none; }
+.install-card .txt { flex: 1; min-width: 0; }
+.install-card .txt b { display: block; font-size: 0.98rem; }
+.install-card .txt small { display: block; color: var(--muted); font-size: 0.8rem; line-height: 1.35; }
+.install-card .btn { flex: none; }
+.ins-x { position: absolute; top: 4px; right: 6px; border: 0; background: none; font-size: 1.2rem; color: var(--muted); width: 26px; height: 26px; }
+.ins-why { margin: 0 0 10px; color: var(--muted); }
+.ins h4 { margin: 12px 0 8px; font-family: var(--font-head); color: var(--heading); }
+.ins-steps { list-style: none; padding: 0; margin: 0 0 10px; display: flex; flex-direction: column; gap: 10px; }
+.ins-steps li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; line-height: 1.45; }
+.ins-n { width: 28px; height: 28px; border-radius: 50%; background: var(--temple-red); color: #fff; display: grid; place-items: center; font-weight: 700; }
+.ins-ic { display: inline-grid; place-items: center; min-width: 26px; height: 26px; padding: 0 4px; border-radius: 7px; background: #F2F2F2; border: 1px solid #ddd; vertical-align: middle; margin: 0 2px; }
+.ins-qr { display: flex; gap: 14px; align-items: center; margin-top: 12px; padding: 12px; border-radius: 14px; background: var(--surface-2); }
+.ins-qr .qr { display: block; flex: none; }
+.ins-qr p { margin: 0; font-size: 0.9rem; }
+@media (max-width: 420px) { .ins-qr { flex-direction: column; text-align: center; } }
 .resume-card .ic { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--temple-red); color: #fff; font-size: 1.1rem; flex: none; }
 .resume-card small { display: block; color: var(--muted); }
 .avatar { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: #FFF8E9; font-size: 1.4rem; border: 2px solid var(--gold); flex: none; }

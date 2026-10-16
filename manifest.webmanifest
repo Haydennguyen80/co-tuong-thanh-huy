@@ -26,5 +26,68 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "id": "./",
+  "categories": [
+    "games",
+    "education"
+  ],
+  "shortcuts": [
+    {
+      "name": "Đánh với máy",
+      "short_name": "Với máy",
+      "url": "./?mo=ai",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Đánh online",
+      "short_name": "Online",
+      "url": "./?mo=online",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Cờ thế",
+      "short_name": "Cờ thế",
+      "url": "./?mo=cothe",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screens/dien-thoai-trang-chu.webp",
+      "sizes": "860x1864",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Trang chủ Cờ Tiên"
+    },
+    {
+      "src": "icons/screens/dien-thoai-van-co.webp",
+      "sizes": "860x1864",
+      "type": "image/webp",
+      "form_factor": "narrow",
+      "label": "Đánh cờ có Thầy tư vấn"
+    },
+    {
+      "src": "icons/screens/may-tinh-van-co.webp",
+      "sizes": "1440x900",
+      "type": "image/webp",
+      "form_factor": "wide",
+      "label": "Đánh cờ trên máy tính"
+    }
   ]
 }

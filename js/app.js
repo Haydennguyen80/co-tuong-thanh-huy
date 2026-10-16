@@ -10,10 +10,11 @@ import { Clock, TIME_CONTROLS, findTimeControl } from './clock.js';
 import { store, uid, AVATARS, BOT_ELO, updateElo } from './storage.js';
 import { sound, setSoundEnabled, music } from './sound.js';
 import { mountScene, bellSVG } from './scene.js';
+import { isStandalone, detectPlatform, guideHTML } from './install.js';
 import { OnlineSession, makeRoomCode, roomLink } from './online.js';
 import { PUZZLES, PUZZLE_GROUPS } from './puzzles.js';
 
-const APP_VERSION = '1.3.0';
+const APP_VERSION = '1.4.0';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -119,7 +120,7 @@ function renderHome() {
     const label = cur.cfg.mode === 'ai' ? `Với máy (${LEVELS[cur.cfg.level].name})` : 'Hai người một máy';
     $('#resume-info').textContent = `${label} · ${cur.moves.length} nước đã đi`;
   } else rb.classList.add('hidden');
-  $('#install-card').classList.toggle('hidden', !S.installPrompt);
+  $('#install-card').classList.toggle('hidden', isStandalone() || installHidden());
 }
 
 const QUOTES = [
@@ -1506,12 +1507,36 @@ function bindNav() {
     music.bell();
   });
   $$('.music-btn').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); setMusic(!S.settings.music); }));
-  $('#btn-install').addEventListener('click', async () => {
-    if (!S.installPrompt) return;
-    S.installPrompt.prompt();
-    await S.installPrompt.userChoice.catch(() => null);
-    S.installPrompt = null; renderHome();
+  $('#btn-install').addEventListener('click', openInstall);
+  $('#btn-install-2').addEventListener('click', openInstall);
+  $('#install-close').addEventListener('click', () => {
+    try { localStorage.setItem('thcotuong:installHide', String(Date.now())); } catch { /* bỏ qua */ }
+    renderHome();
   });
+}
+
+// ======================= CÀI APP =======================
+const appUrl = () => location.origin + location.pathname;
+function installHidden() {
+  try { const t = +localStorage.getItem('thcotuong:installHide'); return t && Date.now() - t < 7 * 86400000; } catch { return false; }
+}
+async function openInstall() {
+  if (isStandalone()) { toast('Cờ Tiên đã được cài trên máy này rồi ạ 🎉'); return; }
+  if (S.installPrompt) {
+    const ev = S.installPrompt;
+    S.installPrompt = null;
+    ev.prompt();
+    const choice = await ev.userChoice.catch(() => null);
+    if (choice && choice.outcome === 'accepted') toast('Đang cài Cờ Tiên…');
+    renderHome();
+    return;
+  }
+  const v = ask('Cài app Cờ Tiên', guideHTML(detectPlatform(), appUrl()), [{ label: 'Đã hiểu', value: null, cls: 'gold' }]);
+  const copy = $('[data-copy-link]');
+  if (copy) copy.onclick = async () => {
+    try { await navigator.clipboard.writeText(appUrl()); toast('Đã sao chép link'); } catch { prompt('Sao chép link này:', appUrl()); }
+  };
+  await v;
 }
 
 function init() {
@@ -1525,6 +1550,13 @@ function init() {
   setSoundEnabled(S.settings.sound);
   renderHome();
   window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); S.installPrompt = e; renderHome(); });
+  window.addEventListener('appinstalled', () => { S.installPrompt = null; toast('Đã cài xong Cờ Tiên! Tìm biểu tượng trên màn hình nhé 🎉', 4000); renderHome(); });
+  // Mở nhanh từ phím tắt của biểu tượng app: ?mo=ai | online | cothe
+  const mo = new URLSearchParams(location.search).get('mo');
+  if (mo) {
+    history.replaceState({ screen: 'home' }, '', location.pathname);
+    if (mo === 'ai') openSetup('ai'); else if (mo === 'online') openOnline(); else if (mo === 'cothe') go('puzzles');
+  }
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
   // Mở từ link mời: ?phong=MÃ
   const code = new URLSearchParams(location.search).get('phong');
