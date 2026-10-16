@@ -13,7 +13,7 @@ import { mountScene, bellSVG } from './scene.js';
 import { OnlineSession, makeRoomCode, roomLink } from './online.js';
 import { PUZZLES, PUZZLE_GROUPS } from './puzzles.js';
 
-const APP_VERSION = '1.2.0';
+const APP_VERSION = '1.3.0';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -1461,11 +1461,19 @@ function renderSettings() {
     if (i.dataset.k === 'music') { setMusic(i.checked); return; }
     st[i.dataset.k] = i.checked; store.saveSettings(st); applyBoardSettings();
   });
+  $('#st-musicvol').value = Math.round((st.musicVolume ?? 0.8) * 100);
+  $('#st-musicvol-val').textContent = $('#st-musicvol').value + '%';
   $('#st-advtime').value = String(st.adviceTime);
   $('#st-ai').value = st.aiEndpoint;
   $('#st-peer').value = st.peerHost;
   $('#app-version').textContent = `Cờ Tiên · phiên bản ${APP_VERSION}`;
 }
+$('#st-musicvol').addEventListener('input', (e) => {
+  const v = +e.target.value / 100;
+  S.settings.musicVolume = v; store.saveSettings(S.settings);
+  $('#st-musicvol-val').textContent = e.target.value + '%';
+  music.setVolume(v);
+});
 $('#st-advtime').addEventListener('change', (e) => { S.settings.adviceTime = +e.target.value; store.saveSettings(S.settings); });
 $('#st-ai').addEventListener('change', (e) => { S.settings.aiEndpoint = e.target.value.trim(); store.saveSettings(S.settings); });
 $('#st-peer').addEventListener('change', (e) => { S.settings.peerHost = e.target.value.trim(); store.saveSettings(S.settings); });
@@ -1509,6 +1517,7 @@ function bindNav() {
 function init() {
   history.replaceState({ screen: 'home' }, '', location.pathname + location.search);
   mountScene();
+  music.setVolume(S.settings.musicVolume ?? 0.8);
   $('#hero-bell').innerHTML = bellSVG(118);
   bindNav();
   updateMusicButtons();

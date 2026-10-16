@@ -18,6 +18,7 @@ export const AVATARS = ['🐯', '🐉', '🦁', '🐴', '🦅', '🐘', '🐢', 
 
 export const DEFAULT_SETTINGS = {
   music: true,          // nhạc thiền tự bật
+  musicVolume: 0.8,     // âm lượng nhạc thiền (0..1)
   sound: true,
   vibrate: true,
   autoAdvice: false,     // tự động tư vấn sau mỗi nước
