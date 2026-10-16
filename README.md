@@ -1,6 +1,6 @@
-# Cờ Tướng Thanh Huy
+# Cờ Tiên
 
-Ứng dụng cờ tướng chạy trên điện thoại và máy tính, cài bằng link (PWA), mang thương hiệu **Dịch Vụ Cầm Đồ Thanh Huy**.
+Ứng dụng cờ tướng phong cách thiền (chùa cổ, tre, chuông đồng, nhạc thiền), chạy trên điện thoại và máy tính, cài bằng link (PWA). Ứng dụng của **Dịch Vụ Cầm Đồ Thanh Huy**.
 
 ## Tính năng
 
@@ -15,12 +15,14 @@
 | 👥 Hai người một máy | Ngồi chung một máy, thay phiên nhau đi. |
 | 🧩 Cờ thế | 30 bài chiếu bí 1, 2, 3 nước. Máy đã kiểm chứng từng bài. |
 | 🏆 Hồ sơ | Tên, ảnh đại diện, điểm xếp hạng (Elo), thống kê, bảng đối đầu với bạn bè, sao lưu dữ liệu. |
+| 🔔 Nhạc thiền | Tiếng đàn ngũ cung, nền trầm và tiếng chuông chùa do app tự tạo (không vướng bản quyền). Tự bật khi mở app, tắt bằng nút 🎵. |
 | 🎓 Thầy AI (tùy chọn) | Nối thêm Claude để giảng kỹ như thầy dạy cờ (tốn phí theo lượt hỏi). |
 
 ## Cấu trúc thư mục
 
 ```
-index.html, css/app.css      Giao diện (màu và chữ theo bộ nhận diện Thanh Huy)
+index.html, css/app.css      Giao diện thiền sáng; trang giới thiệu dùng màu Thanh Huy
+js/scene.js                  Cảnh nền chùa cổ, tre, chuông đồng, logo thư pháp
 js/xiangqi.js                Luật cờ: sinh nước đi, chiếu, FEN
 js/engine.js                 Máy chơi cờ (alpha-beta, đào sâu dần, bảng chuyển vị)
 js/engine-worker.js          Chạy máy cờ ở luồng riêng để giao diện không bị đứng

@@ -1,4 +1,4 @@
-// Cờ Tướng Thanh Huy — điều khiển giao diện chính.
+// Cờ Tiên — điều khiển giao diện chính.
 import { RED, BLACK, START_FEN, moveFrom, moveTo, colorOf, typeOf } from './xiangqi.js';
 import { Game, resultText, sideName, REASONS } from './game.js';
 import { BoardView, kingSquareIfCheck } from './board.js';
@@ -8,11 +8,12 @@ import { buildAdvice, aiPayload, gradeGame, accuracy, GRADES, evalSentence } fro
 import { pieceChar, formatScore, moveToVN } from './notation.js';
 import { Clock, TIME_CONTROLS, findTimeControl } from './clock.js';
 import { store, uid, AVATARS, BOT_ELO, updateElo } from './storage.js';
-import { sound, setSoundEnabled } from './sound.js';
+import { sound, setSoundEnabled, music } from './sound.js';
+import { mountScene, bellSVG } from './scene.js';
 import { OnlineSession, makeRoomCode, roomLink } from './online.js';
 import { PUZZLES, PUZZLE_GROUPS } from './puzzles.js';
 
-const APP_VERSION = '1.0.0';
+const APP_VERSION = '1.1.0';
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -105,8 +106,12 @@ window.addEventListener('popstate', async (e) => {
 function renderHome() {
   const p = S.profile;
   $('#home-avatar').textContent = p.avatar;
-  $('#home-name').textContent = p.name || 'Kỳ thủ (bấm để đặt tên)';
-  $('#home-elo').textContent = `Điểm xếp hạng ${S.rating.elo}`;
+  $('#home-name').textContent = p.name || 'Kỳ thủ (chạm để đặt tên)';
+  $('#home-elo').textContent = `Kỳ thủ · Điểm ${S.rating.elo.toLocaleString('vi-VN')}`;
+  $('#home-rank').textContent = rankName(S.rating.elo);
+  const dp = dailyPuzzle(), solved = Object.keys(store.getPuzzleProgress()).length;
+  $('#tip-puzzle-text').textContent = `Bài ${dp.id}: chiếu bí trong ${dp.mateIn} nước · đã giải ${solved}/${PUZZLES.length} bài`;
+  $('#tip-quote').textContent = `“${QUOTES[dayIndex() % QUOTES.length]}”`;
   const cur = store.getCurrent();
   const rb = $('#btn-resume');
   if (cur && cur.moves) {
@@ -115,6 +120,40 @@ function renderHome() {
     $('#resume-info').textContent = `${label} · ${cur.moves.length} nước đã đi`;
   } else rb.classList.add('hidden');
   $('#install-card').classList.toggle('hidden', !S.installPrompt);
+}
+
+const QUOTES = [
+  'Đi cờ chớ vội, tâm tĩnh thì nước hay tự đến.',
+  'Thắng không kiêu, bại không nản — mỗi ván là một bài học.',
+  'Nhìn cả bàn cờ trước khi nhìn một quân cờ.',
+  'Ra quân cho đủ rồi hãy tấn công.',
+  'Một nước sai không đáng sợ, đáng sợ là không biết vì sao mình sai.',
+  'Giữ Tướng an toàn là gốc, gốc vững thì ngọn mới tươi.',
+  'Xe là quân mạnh nhất — đừng để Xe nằm im ở góc bàn.',
+  'Trước khi đi, hãy tự hỏi: đối phương định làm gì?',
+  'Cờ cao một nước, bó tay cả ván.',
+  'Tập cờ như tập thiền: chậm mà chắc, đều mà bền.',
+];
+const dayIndex = () => Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000);
+const dailyPuzzle = () => PUZZLES[dayIndex() % PUZZLES.length];
+function rankName(elo) {
+  if (elo < 900) return 'Mới tập';
+  if (elo < 1100) return 'Sơ cấp';
+  if (elo < 1300) return 'Trung bình';
+  if (elo < 1500) return 'Khá';
+  if (elo < 1700) return 'Giỏi';
+  return 'Cao thủ';
+}
+
+// ---------- Nhạc thiền: tự bật khi mở app (trình duyệt chỉ cho phát sau lần chạm đầu tiên) ----------
+function updateMusicButtons() {
+  $$('.music-btn').forEach((b) => b.classList.toggle('off', !S.settings.music));
+}
+function setMusic(on) {
+  S.settings.music = on;
+  store.saveSettings(S.settings);
+  if (on) music.start(); else music.stop();
+  updateMusicButtons();
 }
 
 // ======================= THIẾT LẬP VÁN =======================
@@ -1230,7 +1269,7 @@ $('#btn-copy').addEventListener('click', async () => {
 $('#btn-share').addEventListener('click', async () => {
   const link = $('#room-link').textContent, code = $('#room-code').textContent;
   const text = `Vào đánh cờ tướng với ${S.profile.name || 'mình'} nhé! Mã phòng: ${code}`;
-  if (navigator.share) { try { await navigator.share({ title: 'Cờ Tướng Thanh Huy', text, url: link }); } catch { /* người dùng hủy */ } }
+  if (navigator.share) { try { await navigator.share({ title: 'Cờ Tiên', text, url: link }); } catch { /* người dùng hủy */ } }
   else { try { await navigator.clipboard.writeText(`${text}\n${link}`); toast('Đã sao chép lời mời. Dán vào Zalo nhé!'); } catch { prompt('Sao chép lời mời:', link); } }
 });
 
@@ -1407,7 +1446,8 @@ $('#in-import').addEventListener('change', async (e) => {
 
 // ======================= CÀI ĐẶT =======================
 const TOGGLES = [
-  ['sound', 'Âm thanh', 'Tiếng quân cờ, tiếng chiếu tướng'],
+  ['music', 'Nhạc thiền', 'Tự bật khi mở app: tiếng đàn ngân nhẹ và tiếng chuông chùa'],
+  ['sound', 'Âm thanh quân cờ', 'Tiếng quân cờ, tiếng chiếu tướng'],
   ['vibrate', 'Rung khi bị chiếu', 'Chỉ trên điện thoại hỗ trợ'],
   ['autoAdvice', 'Mặc định tự động tư vấn', 'Áp dụng cho ván mới'],
   ['showLegal', 'Hiện nước đi hợp lệ', 'Chấm xanh ở ô có thể đi'],
@@ -1417,11 +1457,14 @@ const TOGGLES = [
 function renderSettings() {
   const st = S.settings;
   $('#settings-toggles').innerHTML = TOGGLES.map(([k, label, sub]) => `<div class="field toggle-row"><span><b>${label}</b>${sub ? `<small>${sub}</small>` : ''}</span><label class="switch"><input type="checkbox" data-k="${k}" ${st[k] ? 'checked' : ''}><i></i></label></div>`).join('');
-  $$('#settings-toggles input').forEach((i) => i.onchange = () => { st[i.dataset.k] = i.checked; store.saveSettings(st); applyBoardSettings(); });
+  $$('#settings-toggles input').forEach((i) => i.onchange = () => {
+    if (i.dataset.k === 'music') { setMusic(i.checked); return; }
+    st[i.dataset.k] = i.checked; store.saveSettings(st); applyBoardSettings();
+  });
   $('#st-advtime').value = String(st.adviceTime);
   $('#st-ai').value = st.aiEndpoint;
   $('#st-peer').value = st.peerHost;
-  $('#app-version').textContent = `Cờ Tướng Thanh Huy · phiên bản ${APP_VERSION}`;
+  $('#app-version').textContent = `Cờ Tiên · phiên bản ${APP_VERSION}`;
 }
 $('#st-advtime').addEventListener('change', (e) => { S.settings.adviceTime = +e.target.value; store.saveSettings(S.settings); });
 $('#st-ai').addEventListener('change', (e) => { S.settings.aiEndpoint = e.target.value.trim(); store.saveSettings(S.settings); });
@@ -1446,11 +1489,15 @@ function bindNav() {
     if (!cur) return;
     startGame(cur.cfg, cur);
   });
-  $('#btn-about').addEventListener('click', () => ask('Dịch Vụ Cầm Đồ Thanh Huy', `
-    <div style="text-align:center"><img src="icons/logo-ngang-sang.png" alt="THANH HUY" style="width:100%;max-width:300px"></div>
-    <p>Cờ Tướng Thanh Huy là ứng dụng miễn phí do <b>Dịch Vụ Cầm Đồ Thanh Huy</b> thực hiện, dành tặng anh chị em yêu cờ tướng.</p>
-    <p>📍 Chợ Cái Côn - KV3, Ấp An Ninh 2, Xã An Lạc Thôn, TP. Cần Thơ<br>📞 Hotline / Zalo: <a href="tel:0916313344">0916.31.33.44</a><br>👍 Facebook: trang “Cầm Đồ Thanh Huy”</p>`,
-  [{ label: '📞 Gọi Thanh Huy', value: 'call', cls: 'gold' }, { label: 'Đóng', value: null }]).then((v) => { if (v === 'call') location.href = 'tel:0916313344'; }));
+  $('#home-avatar').addEventListener('click', () => go('profile'));
+  for (const id of ['#th-corner', '#th-line']) $(id).addEventListener('click', () => go('about'));
+  $('#tip-puzzle').addEventListener('click', () => startPuzzle(dailyPuzzle()));
+  $('#bell-btn').addEventListener('click', () => {
+    const b = $('#bell-btn');
+    b.classList.remove('ring'); void b.offsetWidth; b.classList.add('ring');
+    music.bell();
+  });
+  $$('.music-btn').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); setMusic(!S.settings.music); }));
   $('#btn-install').addEventListener('click', async () => {
     if (!S.installPrompt) return;
     S.installPrompt.prompt();
@@ -1461,7 +1508,10 @@ function bindNav() {
 
 function init() {
   history.replaceState({ screen: 'home' }, '', location.pathname + location.search);
+  mountScene();
+  $('#hero-bell').innerHTML = bellSVG(118);
   bindNav();
+  updateMusicButtons();
   initChat();
   setSoundEnabled(S.settings.sound);
   renderHome();
@@ -1474,9 +1524,15 @@ function init() {
     openOnline(code.toUpperCase());
     ensureName().then(() => joinRoom(code));
   }
-  document.addEventListener('pointerdown', () => sound.unlock(), { once: true });
-  // Lưu đồng hồ khi ẩn app
-  document.addEventListener('visibilitychange', () => { if (document.hidden) saveCurrent(); });
+  // Lần chạm đầu tiên: mở khóa âm thanh và tự bật nhạc thiền (nếu đang bật trong cài đặt)
+  const firstTouch = () => { sound.unlock(); if (S.settings.music) music.start(); };
+  document.addEventListener('pointerdown', firstTouch, { once: true });
+  document.addEventListener('keydown', firstTouch, { once: true });
+  // Ẩn app thì tạm dừng nhạc và lưu ván; mở lại thì phát tiếp
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { saveCurrent(); music.stop(); }
+    else if (S.settings.music && navigator.userActivation?.hasBeenActive !== false) music.start();
+  });
 }
 
 init();

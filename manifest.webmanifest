@@ -1,17 +1,30 @@
 {
-  "name": "Cờ Tướng Thanh Huy",
-  "short_name": "Cờ Tướng TH",
-  "description": "Tập cờ tướng với máy, Thầy tư vấn từng nước, đánh online với bạn qua link.",
+  "name": "Cờ Tiên",
+  "short_name": "Cờ Tiên",
+  "description": "Cờ tướng tĩnh tâm: tập với máy, Thầy tư vấn từng nước, đánh online với bạn qua link.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#0B1B40",
-  "theme_color": "#0B1B40",
+  "background_color": "#F6EAD0",
+  "theme_color": "#F6EAD0",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

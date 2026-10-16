@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Cờ Tướng Thanh Huy</title>
-  <meta name="description" content="Cờ Tướng Thanh Huy — tập với máy, Thầy tư vấn từng nước, đánh online với bạn qua link.">
-  <meta name="theme-color" content="#0B1B40">
+  <title>Cờ Tiên</title>
+  <meta name="description" content="Cờ Tiên — cờ tướng tĩnh tâm: tập với máy, Thầy tư vấn từng nước, đánh online với bạn qua link.">
+  <meta name="theme-color" content="#F6EAD0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Cờ Tướng TH">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cờ Tiên">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" href="icons/favicon-64.png">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap&text=%E5%B8%A5%E4%BB%95%E7%9B%B8%E5%82%8C%E4%BF%A5%E7%82%AE%E5%85%B5%E5%B0%87%E5%A3%AB%E8%B1%A1%E9%A6%AC%E8%BB%8A%E7%A0%B2%E5%8D%92%E6%A5%9A%E6%B2%B3%E6%BC%A2%E7%95%8C">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Work+Sans:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&display=swap&text=%E6%A3%8B%E5%B8%A5%E4%BB%95%E7%9B%B8%E5%82%8C%E4%BF%A5%E7%82%AE%E5%85%B5%E5%B0%87%E5%A3%AB%E8%B1%A1%E9%A6%AC%E8%BB%8A%E7%A0%B2%E5%8D%92%E6%A5%9A%E6%B2%B3%E6%BC%A2%E7%95%8C">
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
@@ -24,17 +24,29 @@
 
     <!-- ============ TRANG CHỦ ============ -->
     <section class="screen active" id="scr-home">
-      <div class="hero">
-        <img class="hero-logo" src="icons/logo-ngang-toi.png" alt="THANH HUY">
-        <h1 class="hero-title">Cờ Tướng Thanh Huy</h1>
-        <p class="hero-sub" id="home-greet">Tập luyện mỗi ngày — tiến bộ từng nước</p>
-        <button class="profile-chip" id="home-profile" type="button">
-          <span class="avatar" id="home-avatar">🐯</span>
-          <span><b id="home-name">Kỳ thủ</b><small id="home-elo">Điểm 1200</small></span>
-        </button>
+      <div class="home-top">
+        <button class="th-mini" id="th-corner" type="button" aria-label="Giới thiệu Dịch Vụ Cầm Đồ Thanh Huy"><img src="icons/logo-symbol.svg" alt=""></button>
+        <div class="top-icons">
+          <button class="round-btn music-btn" type="button" aria-label="Bật/tắt nhạc thiền">🎵</button>
+          <button class="round-btn" data-go="guide" type="button" aria-label="Hướng dẫn">📖</button>
+          <button class="round-btn" data-go="settings" type="button" aria-label="Cài đặt">⚙️</button>
+        </div>
       </div>
-
+      <div class="brand">
+        <button class="bell-btn" id="bell-btn" type="button" aria-label="Gõ chuông"><span id="hero-bell"></span></button>
+        <h1 class="brand-name">Cờ Tiên</h1>
+        <p class="brand-tag">Tĩnh tâm · Luyện trí</p>
+      </div>
       <div class="home-body">
+        <div class="player-card">
+          <button class="avatar big-av" id="home-avatar" type="button" aria-label="Hồ sơ">🐯</button>
+          <div class="pc-info">
+            <button class="pc-name" id="home-profile" type="button"><b id="home-name">Kỳ thủ</b></button>
+            <small id="home-elo">Kỳ thủ · Điểm 1200</small>
+            <button class="th-line" id="th-line" type="button"><img src="icons/logo-symbol.svg" alt="">Dịch Vụ Cầm Đồ Thanh Huy</button>
+          </div>
+          <div class="pc-rank">Hạng<b id="home-rank">Khá</b></div>
+        </div>
         <button class="resume-card hidden" id="btn-resume" type="button">
           <span class="ic">▶</span><span><b>Tiếp tục ván đang chơi</b><small id="resume-info"></small></span>
         </button>
@@ -43,35 +55,33 @@
           <button class="btn small gold" id="btn-install" type="button">Cài app</button>
         </div>
         <div class="menu-grid">
-          <button class="menu-card primary" data-go="setup-ai" type="button">
-            <span class="ic">🤖</span><b>Đánh với máy</b><small>Tập luyện, có Thầy tư vấn từng nước</small>
-          </button>
-          <button class="menu-card primary" data-go="online" type="button">
-            <span class="ic">🌐</span><b>Đánh online</b><small>Tạo phòng, gửi link mời bạn</small>
-          </button>
-          <button class="menu-card" data-go="setup-local" type="button">
-            <span class="ic">👥</span><b>Hai người một máy</b><small>Ngồi chung, thay phiên đi</small>
-          </button>
-          <button class="menu-card" data-go="puzzles" type="button">
-            <span class="ic">🧩</span><b>Cờ thế</b><small>Bài tập chiếu bí</small>
-          </button>
-          <button class="menu-card" data-go="history" type="button">
-            <span class="ic">📜</span><b>Ván đã chơi</b><small>Xem lại &amp; phân tích</small>
-          </button>
-          <button class="menu-card" data-go="profile" type="button">
-            <span class="ic">🏆</span><b>Hồ sơ &amp; xếp hạng</b><small>Thành tích, đối đầu</small>
-          </button>
-          <button class="menu-card" data-go="settings" type="button">
-            <span class="ic">⚙️</span><b>Cài đặt</b><small>Âm thanh, tư vấn, Thầy AI</small>
-          </button>
-          <button class="menu-card" data-go="guide" type="button">
-            <span class="ic">📖</span><b>Hướng dẫn</b><small>Luật cờ &amp; cách dùng app</small>
-          </button>
+          <button class="menu-big red" data-go="setup-ai" type="button"><span class="ic">🤖</span><b>Đánh với máy</b><small>Có Thầy tư vấn từng nước</small></button>
+          <button class="menu-big green" data-go="online" type="button"><span class="ic">🌐</span><b>Đánh online</b><small>Gửi link mời bạn</small></button>
+          <button class="menu-small" data-go="puzzles" type="button"><span class="ic">🧩</span>Cờ thế</button>
+          <button class="menu-small" data-go="setup-local" type="button"><span class="ic">👥</span>Hai người</button>
+          <button class="menu-small" data-go="history" type="button"><span class="ic">📜</span>Ván đã chơi</button>
+          <button class="menu-small" data-go="profile" type="button"><span class="ic">🏆</span>Xếp hạng</button>
         </div>
-        <button class="sponsor" id="btn-about" type="button">
-          <img src="icons/logo-symbol.svg" alt="">
-          <span>Ứng dụng của <b>Dịch Vụ Cầm Đồ Thanh Huy</b><br><small>Tài Chính Vững Vàng - An Toàn - Bảo Mật</small></span>
-        </button>
+        <button class="tip-card" id="tip-puzzle" type="button"><span class="ic">🧩</span><span><b>Bài cờ thế hôm nay</b><small id="tip-puzzle-text"></small></span></button>
+        <div class="tip-card"><span class="ic">🍵</span><span><b>Lời Thầy hôm nay</b><small id="tip-quote"></small></span></div>
+      </div>
+    </section>
+
+    <!-- ============ GIỚI THIỆU THANH HUY ============ -->
+    <section class="screen" id="scr-about">
+      <div class="about-page">
+        <header class="about-top"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2>Giới thiệu</h2><span></span></header>
+        <div class="about-body">
+          <img class="about-logo" src="icons/logo-ngang-toi.png" alt="Dịch Vụ Cầm Đồ Thanh Huy">
+          <div class="about-card">
+            <p><b>Cờ Tiên</b> là ứng dụng cờ tướng miễn phí do <b>Dịch Vụ Cầm Đồ Thanh Huy</b> thực hiện, dành tặng anh chị em yêu cờ tướng.</p>
+            <p>📍 Chợ Cái Côn - KV3, Ấp An Ninh 2, Xã An Lạc Thôn, TP. Cần Thơ</p>
+            <p>📞 Hotline / Zalo: <b>0916.31.33.44</b></p>
+          </div>
+          <a class="about-btn call" href="tel:0916313344">📞 Gọi Thanh Huy</a>
+          <a class="about-btn zalo" href="https://zalo.me/0916313344" target="_blank" rel="noopener"><i>Zalo</i> Nhắn Zalo</a>
+          <a class="about-btn fb" href="https://www.facebook.com/HaydenNguyen80/" target="_blank" rel="noopener"><i>f</i> Fanpage Facebook</a>
+        </div>
       </div>
     </section>
 
@@ -111,7 +121,7 @@
       <header class="topbar">
         <button class="icon-btn" id="game-back" type="button" aria-label="Thoát">←</button>
         <h2 id="game-title">Ván cờ</h2>
-        <button class="icon-btn" id="game-menu-btn" type="button" aria-label="Thêm">⋯</button>
+        <span class="top-right"><button class="icon-btn music-btn" type="button" aria-label="Bật/tắt nhạc thiền">🎵</button><button class="icon-btn" id="game-menu-btn" type="button" aria-label="Thêm">⋯</button></span>
       </header>
       <div class="game-layout">
         <div class="board-col">
@@ -123,7 +133,7 @@
           </div>
           <div class="board-wrap">
             <div class="evalbar" id="evalbar" title="Cán cân thế cờ"><i></i></div>
-            <div id="board"></div>
+            <div class="stone-table"><div id="board"></div></div>
             <div class="float-emoji" id="float-emoji"></div>
           </div>
           <div class="player" id="pl-bottom">

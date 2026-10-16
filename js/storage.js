@@ -17,6 +17,7 @@ export const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().to
 export const AVATARS = ['🐯', '🐉', '🦁', '🐴', '🦅', '🐘', '🐢', '🦊', '🐼', '🐓', '🐃', '🐟', '🌾', '🌴', '⭐', '👑'];
 
 export const DEFAULT_SETTINGS = {
+  music: true,          // nhạc thiền tự bật
   sound: true,
   vibrate: true,
   autoAdvice: false,     // tự động tư vấn sau mỗi nước

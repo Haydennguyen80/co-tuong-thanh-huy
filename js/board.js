@@ -12,9 +12,6 @@ const el = (tag, attrs = {}, parent) => {
   return e;
 };
 
-// Biểu tượng Thanh Huy (vòng tròn + ngôi nhà) để in chìm giữa sông
-const TH_RING = 'M20 500a480 480 0 1 0 960 0a480 480 0 1 0-960 0ZM107.7 500a392.3 392.3 0 1 0 784.6 0a392.3 392.3 0 1 0-784.6 0Z';
-const TH_HOUSE = 'M663.3 292.4L597.9 292.4L597.9 335.4L499.0 257.3L239.1 502.9L334.8 502.9L495.9 353.0L596.3 442.3L596.3 606.5L400.2 606.5L400.2 474.2L333.2 539.5L333.2 676.7L664.9 676.7L664.9 506.1L759.0 504.5L663.3 412.0Z';
 
 export class BoardView {
   constructor(container, handlers = {}) {
@@ -35,14 +32,12 @@ export class BoardView {
     const defs = el('defs', {}, svg);
     defs.innerHTML = `
       <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#F1D29A"/><stop offset="0.5" stop-color="#E6BE7C"/><stop offset="1" stop-color="#D9A862"/>
+        <stop offset="0" stop-color="#F6DFAE"/><stop offset="0.55" stop-color="#EBC888"/><stop offset="1" stop-color="#DDB06B"/>
       </linearGradient>
-      <radialGradient id="pieceFace" cx="0.4" cy="0.35" r="0.75">
-        <stop offset="0" stop-color="#FFF8E7"/><stop offset="0.7" stop-color="#F3DFB4"/><stop offset="1" stop-color="#D9B77C"/>
+      <pattern id="grain" width="120" height="18" patternUnits="userSpaceOnUse"><path d="M0 8Q30 3 60 8T120 8" stroke="#B8894A" stroke-width="1.6" fill="none" opacity="0.2"/></pattern>
+      <radialGradient id="pieceFace" cx="0.38" cy="0.3" r="0.8">
+        <stop offset="0" stop-color="#FFFBEF"/><stop offset="0.6" stop-color="#F4E2B8"/><stop offset="1" stop-color="#D8B57A"/>
       </radialGradient>
-      <linearGradient id="thGold" x1="0.1" y1="0" x2="0.9" y2="1">
-        <stop offset="0" stop-color="#E8CC94"/><stop offset="0.45" stop-color="#C9A25E"/><stop offset="1" stop-color="#8A5F3B"/>
-      </linearGradient>
       <filter id="pieceShadow" x="-30%" y="-30%" width="160%" height="160%">
         <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#3b2a12" flood-opacity="0.45"/>
       </filter>
@@ -50,6 +45,7 @@ export class BoardView {
       <marker id="arrowThreat" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#C62828"/></marker>
       <marker id="arrowHint" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2A4D94"/></marker>`;
     el('rect', { x: 0, y: 0, width: W, height: H, rx: 26, fill: 'url(#wood)' }, svg);
+    el('rect', { x: 0, y: 0, width: W, height: H, rx: 26, fill: 'url(#grain)' }, svg);
     this.gridLayer = el('g', { class: 'grid' }, svg);
     this.coordLayer = el('g', { class: 'coords' }, svg);
     this.markLayer = el('g', {}, svg);
@@ -95,9 +91,6 @@ export class BoardView {
     const river = el('g', { 'font-family': '"Noto Serif SC","STKaiti","KaiTi",serif', 'font-size': 56, fill: '#5A3B1A', 'font-weight': 700, 'text-anchor': 'middle', 'dominant-baseline': 'central' }, g);
     el('text', { x: X0 + 1.5 * CELL, y: ry }, river).textContent = '楚 河';
     el('text', { x: X0 + 6.5 * CELL, y: ry }, river).textContent = '漢 界';
-    const logo = el('g', { transform: `translate(${X0 + 4 * CELL - 34}, ${ry - 34}) scale(0.068)`, opacity: 0.55 }, g);
-    el('path', { d: TH_RING, fill: 'url(#thGold)', 'fill-rule': 'evenodd' }, logo);
-    el('path', { d: TH_HOUSE, fill: 'url(#thGold)' }, logo);
   }
 
   drawCoords() {
@@ -149,9 +142,13 @@ export class BoardView {
       const [x, y] = this.xy(sq);
       const g = el('g', { class: 'piece' + (colorOf(p) === RED ? ' red' : ' black'), 'data-sq': sq }, pl);
       g.style.transform = `translate(${x}px, ${y}px)`;
-      el('circle', { r: 45, fill: 'url(#pieceFace)', stroke: '#7A5428', 'stroke-width': 3, filter: 'url(#pieceShadow)' }, g);
+      // Quân cờ nổi 3D: bóng đổ + hai lớp cạnh gỗ + mặt quân
+      el('ellipse', { cx: 5, cy: 13, rx: 47, ry: 45, fill: '#3a2508', opacity: 0.28 }, g);
+      el('circle', { cy: 7, r: 45, fill: '#A9783C' }, g);
+      el('circle', { cy: 3.5, r: 45, fill: '#C39050' }, g);
+      el('circle', { r: 45, fill: 'url(#pieceFace)', stroke: '#8A5F2E', 'stroke-width': 2.5 }, g);
       el('circle', { r: 37, fill: 'none', stroke: colorOf(p) === RED ? '#B3261E' : '#222', 'stroke-width': 3 }, g);
-      const t = el('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central', y: 2, 'font-size': 50, 'font-weight': 700, fill: colorOf(p) === RED ? '#B3261E' : '#1A1A1A', 'font-family': '"Noto Serif SC","STKaiti","KaiTi","Songti SC",serif' }, g);
+      const t = el('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central', y: 2, 'font-size': 50, 'font-weight': 900, fill: colorOf(p) === RED ? '#B3261E' : '#1A1A1A', 'font-family': '"Noto Serif SC","STKaiti","KaiTi","Songti SC",serif' }, g);
       t.textContent = pieceChar(p);
       this.pieceEls.set(sq, g);
       if (anim && moveTo(anim) === sq) {
