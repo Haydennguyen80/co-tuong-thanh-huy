@@ -1,0 +1,17 @@
+{
+  "name": "thay-ai-co-tuong",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Máy chủ Thầy AI cho Cờ Tướng Thanh Huy (Cloudflare Worker)",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

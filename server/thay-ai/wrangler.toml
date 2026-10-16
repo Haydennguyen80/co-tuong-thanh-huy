@@ -1,0 +1,11 @@
+name = "thay-ai-co-tuong"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Mô hình AI. Mặc định Claude Opus 5.5 (giảng hay nhất). Muốn tiết kiệm có thể đổi sang "claude-haiku-5-5".
+MODEL = "claude-opus-5-5"
+# Địa chỉ trang app được phép gọi (để trống = cho phép mọi nơi)
+ALLOWED_ORIGIN = ""
+# Khóa ANTHROPIC_API_KEY đặt bằng lệnh: npx wrangler secret put ANTHROPIC_API_KEY

@@ -1,0 +1,4 @@
+node_modules/
+server/thay-ai/node_modules/
+server/thay-ai/.wrangler/
+.DS_Store

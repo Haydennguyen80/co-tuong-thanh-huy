@@ -1,0 +1,40 @@
+// Bài cờ thế: Đỏ đi trước, chiếu bí trong đúng số nước. Mỗi bài đã được máy kiểm chứng
+// (có đường chiếu bí bắt buộc và nước đầu tiên là duy nhất) bằng tests/gen-puzzles.mjs.
+export const PUZZLES = [
+  { id: 1, mateIn: 1, fen: '5a3/1P3k3/3a5/9/8R/7N1/9/9/4K4/9 w - - 0 1' },
+  { id: 2, mateIn: 1, fen: '4ca3/3k5/5a2b/7R1/9/9/9/9/4K4/9 w - - 0 1' },
+  { id: 3, mateIn: 1, fen: '3a1kb2/N8/9/1c2R4/6b2/9/9/9/1n2K4/9 w - - 0 1' },
+  { id: 4, mateIn: 1, fen: '2b6/2R1ak3/b3N4/7R1/9/9/9/9/4K4/9 w - - 0 1' },
+  { id: 5, mateIn: 1, fen: '9/5k3/9/9/9/5C3/4C4/9/9/4K4 w - - 0 1' },
+  { id: 6, mateIn: 1, fen: '5kb2/9/4R4/9/7p1/9/9/9/4K4/9 w - - 0 1' },
+  { id: 7, mateIn: 2, fen: '4P4/5k3/9/9/9/N8/9/9/4K4/9 w - - 0 1' },
+  { id: 8, mateIn: 2, fen: '3k5/9/3C5/9/9/9/R8/9/9/3K5 w - - 0 1' },
+  { id: 9, mateIn: 2, fen: '7N1/4k4/3a5/9/R8/9/9/9/9/3K5 w - - 0 1' },
+  { id: 10, mateIn: 2, fen: '5k3/R3a4/5a2b/5R3/6b2/9/9/9/9/4K4 w - - 0 1' },
+  { id: 11, mateIn: 2, fen: '3k5/9/8C/N8/4C4/9/9/9/4K4/9 w - - 0 1' },
+  { id: 12, mateIn: 2, fen: '4N4/4k4/9/6P2/9/9/8R/9/9/5K3 w - - 0 1' },
+  { id: 13, mateIn: 2, fen: '5a3/3k3C1/b8/3C5/9/9/8n/9/9/4K4 w - - 0 1' },
+  { id: 14, mateIn: 2, fen: '5kb2/R8/1R1ab4/3c5/9/9/2p6/9/4K4/9 w - - 0 1' },
+  { id: 15, mateIn: 2, fen: '4Nk3/9/5a3/8C/9/9/9/9/9/4K4 w - - 0 1' },
+  { id: 16, mateIn: 2, fen: '4k4/9/3Rb3P/9/9/9/9/8n/4K4/9 w - - 0 1' },
+  { id: 17, mateIn: 2, fen: '3k5/9/b8/9/1C3N3/9/1N7/9/9/4K4 w - - 0 1' },
+  { id: 18, mateIn: 2, fen: '3k2b1P/9/9/8c/6b2/9/4R4/9/4K4/9 w - - 0 1' },
+  { id: 19, mateIn: 3, fen: '2bk5/9/9/9/9/2CC5/6N2/9/4K4/9 w - - 0 1' },
+  { id: 20, mateIn: 3, fen: 'P1b5R/9/4ka3/8p/9/c8/8R/9/9/5K3 w - - 0 1' },
+  { id: 21, mateIn: 3, fen: '7P1/4k4/4bR3/9/9/9/9/9/9/3K5 w - - 0 1' },
+  { id: 22, mateIn: 3, fen: '3kNa3/9/8C/9/9/9/9/9/4K4/9 w - - 0 1' },
+  { id: 23, mateIn: 3, fen: '1R1a5/3k5/N3c4/9/9/9/9/9/9/5K3 w - - 0 1' },
+  { id: 24, mateIn: 3, fen: '9/5kC2/6NP1/9/9/9/9/9/9/3K5 w - - 0 1' },
+  { id: 25, mateIn: 3, fen: '3k5/c6R1/3a5/9/1N3Cb2/9/9/9/9/4K4 w - - 0 1' },
+  { id: 26, mateIn: 3, fen: 'N2k5/9/4b1R2/p8/6b2/9/5Rr2/9/9/4K4 w - - 0 1' },
+  { id: 27, mateIn: 3, fen: '5k3/4a4/3P3n1/9/9/9/7R1/9/4K4/9 w - - 0 1' },
+  { id: 28, mateIn: 3, fen: '3a2R2/3k5/9/9/9/9/3C5/9/9/3K5 w - - 0 1' },
+  { id: 29, mateIn: 3, fen: 'c8/3k5/bR6R/9/9/6n2/3N5/9/9/3K5 w - - 0 1' },
+  { id: 30, mateIn: 3, fen: '5ab2/4k4/5C2N/9/9/9/8C/9/9/3K5 w - - 0 1' },
+];
+
+export const PUZZLE_GROUPS = [
+  { mateIn: 1, title: 'Chiếu bí 1 nước', note: 'Khởi động: tìm nước chiếu bí ngay.' },
+  { mateIn: 2, title: 'Chiếu bí 2 nước', note: 'Một nước chuẩn bị, một nước kết thúc.' },
+  { mateIn: 3, title: 'Chiếu bí 3 nước', note: 'Cần tính toán liên hoàn — luyện tư duy sâu.' },
+];

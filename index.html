@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cờ Tướng Thanh Huy</title>
+  <meta name="description" content="Cờ Tướng Thanh Huy — tập với máy, Thầy tư vấn từng nước, đánh online với bạn qua link.">
+  <meta name="theme-color" content="#0B1B40">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Cờ Tướng TH">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icons/favicon-64.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Work+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&display=swap&text=%E5%B8%A5%E4%BB%95%E7%9B%B8%E5%82%8C%E4%BF%A5%E7%82%AE%E5%85%B5%E5%B0%87%E5%A3%AB%E8%B1%A1%E9%A6%AC%E8%BB%8A%E7%A0%B2%E5%8D%92%E6%A5%9A%E6%B2%B3%E6%BC%A2%E7%95%8C">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ============ TRANG CHỦ ============ -->
+    <section class="screen active" id="scr-home">
+      <div class="hero">
+        <img class="hero-logo" src="icons/logo-ngang-toi.png" alt="THANH HUY">
+        <h1 class="hero-title">Cờ Tướng Thanh Huy</h1>
+        <p class="hero-sub" id="home-greet">Tập luyện mỗi ngày — tiến bộ từng nước</p>
+        <button class="profile-chip" id="home-profile" type="button">
+          <span class="avatar" id="home-avatar">🐯</span>
+          <span><b id="home-name">Kỳ thủ</b><small id="home-elo">Điểm 1200</small></span>
+        </button>
+      </div>
+
+      <div class="home-body">
+        <button class="resume-card hidden" id="btn-resume" type="button">
+          <span class="ic">▶</span><span><b>Tiếp tục ván đang chơi</b><small id="resume-info"></small></span>
+        </button>
+        <div class="install-card hidden" id="install-card">
+          <span>📲 Cài app lên màn hình chính để mở nhanh như app thật.</span>
+          <button class="btn small gold" id="btn-install" type="button">Cài app</button>
+        </div>
+        <div class="menu-grid">
+          <button class="menu-card primary" data-go="setup-ai" type="button">
+            <span class="ic">🤖</span><b>Đánh với máy</b><small>Tập luyện, có Thầy tư vấn từng nước</small>
+          </button>
+          <button class="menu-card primary" data-go="online" type="button">
+            <span class="ic">🌐</span><b>Đánh online</b><small>Tạo phòng, gửi link mời bạn</small>
+          </button>
+          <button class="menu-card" data-go="setup-local" type="button">
+            <span class="ic">👥</span><b>Hai người một máy</b><small>Ngồi chung, thay phiên đi</small>
+          </button>
+          <button class="menu-card" data-go="puzzles" type="button">
+            <span class="ic">🧩</span><b>Cờ thế</b><small>Bài tập chiếu bí</small>
+          </button>
+          <button class="menu-card" data-go="history" type="button">
+            <span class="ic">📜</span><b>Ván đã chơi</b><small>Xem lại &amp; phân tích</small>
+          </button>
+          <button class="menu-card" data-go="profile" type="button">
+            <span class="ic">🏆</span><b>Hồ sơ &amp; xếp hạng</b><small>Thành tích, đối đầu</small>
+          </button>
+          <button class="menu-card" data-go="settings" type="button">
+            <span class="ic">⚙️</span><b>Cài đặt</b><small>Âm thanh, tư vấn, Thầy AI</small>
+          </button>
+          <button class="menu-card" data-go="guide" type="button">
+            <span class="ic">📖</span><b>Hướng dẫn</b><small>Luật cờ &amp; cách dùng app</small>
+          </button>
+        </div>
+        <button class="sponsor" id="btn-about" type="button">
+          <img src="icons/logo-symbol.svg" alt="">
+          <span>Ứng dụng của <b>Dịch Vụ Cầm Đồ Thanh Huy</b><br><small>Tài Chính Vững Vàng - An Toàn - Bảo Mật</small></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ THIẾT LẬP VÁN ============ -->
+    <section class="screen" id="scr-setup">
+      <header class="topbar"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2 id="setup-title">Đánh với máy</h2><span></span></header>
+      <div class="page">
+        <div class="card">
+          <div class="field" id="f-color">
+            <label>Bạn cầm quân</label>
+            <div class="seg" data-name="color">
+              <button type="button" data-v="red" class="on">🔴 Đỏ (đi trước)</button>
+              <button type="button" data-v="black">⚫ Đen</button>
+              <button type="button" data-v="random">🎲 Ngẫu nhiên</button>
+            </div>
+          </div>
+          <div class="field" id="f-level">
+            <label>Độ khó của máy: <b id="level-name">Trung bình</b></label>
+            <input type="range" min="1" max="8" value="4" id="in-level">
+            <div class="range-labels"><span>Mới tập</span><span>Cao thủ</span></div>
+          </div>
+          <div class="field">
+            <label for="in-time">Thời gian mỗi bên</label>
+            <select id="in-time"></select>
+          </div>
+          <div class="field toggle-row" id="f-autoadvice">
+            <span><b>Tự động tư vấn sau mỗi nước</b><small>Thầy chấm điểm ngay mỗi khi bạn đi</small></span>
+            <label class="switch"><input type="checkbox" id="in-autoadvice"><i></i></label>
+          </div>
+        </div>
+        <button class="btn gold big" id="btn-start" type="button">Bắt đầu ván cờ</button>
+      </div>
+    </section>
+
+    <!-- ============ VÁN CỜ ============ -->
+    <section class="screen" id="scr-game">
+      <header class="topbar">
+        <button class="icon-btn" id="game-back" type="button" aria-label="Thoát">←</button>
+        <h2 id="game-title">Ván cờ</h2>
+        <button class="icon-btn" id="game-menu-btn" type="button" aria-label="Thêm">⋯</button>
+      </header>
+      <div class="game-layout">
+        <div class="board-col">
+          <div class="player" id="pl-top">
+            <span class="avatar">🤖</span>
+            <span class="pname"><b>Máy</b><small></small></span>
+            <span class="captured"></span>
+            <span class="clock">--:--</span>
+          </div>
+          <div class="board-wrap">
+            <div class="evalbar" id="evalbar" title="Cán cân thế cờ"><i></i></div>
+            <div id="board"></div>
+            <div class="float-emoji" id="float-emoji"></div>
+          </div>
+          <div class="player" id="pl-bottom">
+            <span class="avatar">🐯</span>
+            <span class="pname"><b>Bạn</b><small></small></span>
+            <span class="captured"></span>
+            <span class="clock">--:--</span>
+          </div>
+          <div class="view-banner hidden" id="view-banner">
+            <span id="view-text">Đang xem lại</span>
+            <button class="btn small" id="btn-live" type="button">Về ván đang chơi</button>
+          </div>
+          <div class="status-line" id="status">Lượt Đỏ đi</div>
+          <div class="actions" id="actions">
+            <button class="act gold" id="act-advice" type="button"><span>💡</span>Tư vấn</button>
+            <button class="act" id="act-hint" type="button"><span>🎯</span>Gợi ý</button>
+            <button class="act" id="act-undo" type="button"><span>↶</span>Đi lại</button>
+            <button class="act" id="act-flip" type="button"><span>🔄</span>Xoay bàn</button>
+            <button class="act" id="act-more" type="button"><span>⚑</span>Hòa/Thua</button>
+          </div>
+          <div class="actions hidden" id="review-nav">
+            <button class="act" data-nav="start" type="button"><span>⏮</span>Đầu</button>
+            <button class="act" data-nav="prev" type="button"><span>◀</span>Lùi</button>
+            <button class="act" data-nav="next" type="button"><span>▶</span>Tới</button>
+            <button class="act" data-nav="end" type="button"><span>⏭</span>Cuối</button>
+            <button class="act gold" id="act-review-advice" type="button"><span>💡</span>Tư vấn</button>
+          </div>
+        </div>
+        <aside class="side-col">
+          <div class="tabs" role="tablist">
+            <button class="tab on" data-tab="advice" type="button">Tư vấn</button>
+            <button class="tab" data-tab="moves" type="button">Nước đi</button>
+            <button class="tab hidden" data-tab="chat" type="button">Trò chuyện <i class="dot hidden" id="chat-dot"></i></button>
+          </div>
+          <div class="tab-panel on" id="panel-advice">
+            <div class="advice-empty" id="advice-empty">
+              <p>💡 Đi xong một nước, bấm <b>Tư vấn</b> để Thầy chấm điểm, chỉ nước tốt hơn và giải thích vì sao.</p>
+              <p class="muted">Bấm <b>Gợi ý</b> nếu bạn muốn biết nên đi nước nào tiếp theo.</p>
+            </div>
+            <div id="advice-box"></div>
+            <div id="analysis-box"></div>
+          </div>
+          <div class="tab-panel" id="panel-moves">
+            <ol class="move-list" id="move-list"></ol>
+          </div>
+          <div class="tab-panel" id="panel-chat">
+            <div class="chat-log" id="chat-log"></div>
+            <div class="quick-row" id="quick-emoji"></div>
+            <div class="quick-row phrases" id="quick-phrases"></div>
+            <form class="chat-form" id="chat-form">
+              <input id="chat-input" maxlength="200" placeholder="Nhắn cho đối thủ…" autocomplete="off">
+              <button class="btn gold small" type="submit">Gửi</button>
+            </form>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ ONLINE ============ -->
+    <section class="screen" id="scr-online">
+      <header class="topbar"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2>Đánh online</h2><span></span></header>
+      <div class="page">
+        <div class="seg wide" id="online-tabs">
+          <button type="button" data-v="host" class="on">Tạo phòng mới</button>
+          <button type="button" data-v="join">Vào phòng của bạn</button>
+        </div>
+        <div class="card" id="online-host">
+          <div class="field">
+            <label>Bạn cầm quân</label>
+            <div class="seg" data-name="ocolor">
+              <button type="button" data-v="red" class="on">🔴 Đỏ</button>
+              <button type="button" data-v="black">⚫ Đen</button>
+              <button type="button" data-v="random">🎲 Ngẫu nhiên</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="in-otime">Thời gian mỗi bên</label>
+            <select id="in-otime"></select>
+          </div>
+          <button class="btn gold big" id="btn-host" type="button">Tạo phòng &amp; lấy link mời</button>
+          <div class="room-box hidden" id="room-box">
+            <p class="muted">Mã phòng</p>
+            <div class="room-code" id="room-code">------</div>
+            <div class="room-link" id="room-link"></div>
+            <div class="btn-row">
+              <button class="btn gold" id="btn-share" type="button">📤 Gửi link (Zalo, Messenger…)</button>
+              <button class="btn" id="btn-copy" type="button">📋 Sao chép link</button>
+            </div>
+            <p class="status-msg" id="host-status">Đang tạo phòng…</p>
+            <div class="spinner"></div>
+          </div>
+        </div>
+        <div class="card hidden" id="online-join">
+          <div class="field">
+            <label for="in-code">Nhập mã phòng (6 ký tự)</label>
+            <input id="in-code" maxlength="6" autocapitalize="characters" autocomplete="off" placeholder="VD: TH4K9P" class="code-input">
+          </div>
+          <button class="btn gold big" id="btn-join" type="button">Vào phòng</button>
+          <p class="status-msg" id="join-status"></p>
+        </div>
+        <div class="note">
+          <b>Cách chơi online:</b> Bạn tạo phòng, gửi link cho bạn bè. Bạn bè bấm link là vào bàn ngay, không cần cài đặt hay đăng ký.
+          Hai máy kết nối trực tiếp với nhau, cần có mạng (Wi-Fi hoặc 4G).
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CỜ THẾ ============ -->
+    <section class="screen" id="scr-puzzles">
+      <header class="topbar"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2>Cờ thế — Bài tập</h2><span></span></header>
+      <div class="page" id="puzzle-list"></div>
+    </section>
+
+    <!-- ============ LỊCH SỬ ============ -->
+    <section class="screen" id="scr-history">
+      <header class="topbar"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2>Ván đã chơi</h2><span></span></header>
+      <div class="page">
+        <div class="seg wide" id="history-filter">
+          <button type="button" data-v="all" class="on">Tất cả</button>
+          <button type="button" data-v="ai">Với máy</button>
+          <button type="button" data-v="online">Online</button>
+          <button type="button" data-v="local">2 người</button>
+        </div>
+        <div id="history-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ HỒ SƠ ============ -->
+    <section class="screen" id="scr-profile">
+      <header class="topbar"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2>Hồ sơ &amp; xếp hạng</h2><span></span></header>
+      <div class="page">
+        <div class="card profile-card">
+          <div class="avatar big" id="pf-avatar">🐯</div>
+          <div class="field">
+            <label for="pf-name">Tên hiển thị</label>
+            <input id="pf-name" maxlength="24" placeholder="Nhập tên của bạn">
+          </div>
+          <div class="avatar-grid" id="pf-avatars"></div>
+        </div>
+        <div class="stats" id="pf-stats"></div>
+        <div class="card">
+          <h3>Bảng đối đầu với bạn bè</h3>
+          <div id="pf-h2h"></div>
+        </div>
+        <div class="card">
+          <h3>Thành tích với máy</h3>
+          <div id="pf-bots"></div>
+        </div>
+        <div class="card">
+          <h3>Sao lưu dữ liệu</h3>
+          <p class="muted">Dữ liệu (hồ sơ, ván đã chơi) lưu ngay trên máy này. Sao lưu ra tệp để chuyển sang máy khác.</p>
+          <div class="btn-row">
+            <button class="btn" id="btn-export" type="button">⬇️ Xuất tệp sao lưu</button>
+            <label class="btn" for="in-import">⬆️ Nhập tệp sao lưu</label>
+            <input type="file" id="in-import" accept="application/json,.json" hidden>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CÀI ĐẶT ============ -->
+    <section class="screen" id="scr-settings">
+      <header class="topbar"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2>Cài đặt</h2><span></span></header>
+      <div class="page">
+        <div class="card" id="settings-toggles"></div>
+        <div class="card">
+          <div class="field">
+            <label for="st-advtime">Thời gian Thầy suy nghĩ khi tư vấn</label>
+            <select id="st-advtime">
+              <option value="800">Nhanh (~1 giây)</option>
+              <option value="1500">Vừa (~2 giây)</option>
+              <option value="3000">Kỹ (~3 giây)</option>
+              <option value="6000">Rất kỹ (~6 giây)</option>
+            </select>
+          </div>
+        </div>
+        <div class="card">
+          <h3>🎓 Thầy AI giảng chi tiết (tùy chọn)</h3>
+          <p class="muted">Máy cờ trong app luôn chạy miễn phí. Nếu muốn có lời giảng sâu như thầy dạy cờ, có thể nối thêm máy chủ AI (có tốn phí theo lượt hỏi). Dán địa chỉ máy chủ vào đây; xem hướng dẫn cài trong tệp README.</p>
+          <div class="field"><input id="st-ai" placeholder="https://thay-ai.ten-cua-ban.workers.dev" inputmode="url"></div>
+        </div>
+        <div class="card">
+          <h3>Máy chủ kết nối online (nâng cao)</h3>
+          <p class="muted">Để trống để dùng máy chủ miễn phí. Chỉ điền khi đã tự dựng máy chủ PeerJS riêng.</p>
+          <div class="field"><input id="st-peer" placeholder="peer.ten-cua-ban.com" inputmode="url"></div>
+        </div>
+        <div class="card">
+          <h3>Cài app lên điện thoại</h3>
+          <p><b>iPhone (Safari):</b> bấm nút Chia sẻ <span class="kbd">⬆</span> → chọn <b>“Thêm vào MH chính”</b>.</p>
+          <p><b>Samsung / Android (Chrome):</b> bấm <span class="kbd">⋮</span> → <b>“Thêm vào màn hình chính”</b> hoặc <b>“Cài đặt ứng dụng”</b>.</p>
+          <p><b>Máy tính (Chrome/Edge):</b> bấm biểu tượng cài đặt ở thanh địa chỉ.</p>
+        </div>
+        <p class="muted center" id="app-version"></p>
+      </div>
+    </section>
+
+    <!-- ============ HƯỚNG DẪN ============ -->
+    <section class="screen" id="scr-guide">
+      <header class="topbar"><button class="icon-btn" data-back type="button" aria-label="Quay lại">←</button><h2>Hướng dẫn</h2><span></span></header>
+      <div class="page guide">
+        <div class="card">
+          <h3>Cách dùng app</h3>
+          <ul>
+            <li><b>Đi quân:</b> chạm vào quân của mình rồi chạm vào ô muốn đi (chấm xanh là ô đi được). Có thể kéo thả.</li>
+            <li><b>💡 Tư vấn:</b> sau khi đi, Thầy chấm nước của bạn (⭐ Hay nhất · ✅ Tốt · 👍 Tạm được · ⚠️ Thiếu chính xác · ❌ Sai lầm · 💥 Hớ nặng), vẽ <span class="green">mũi tên xanh</span> chỉ nước tốt hơn và giải thích lý do.</li>
+            <li><b>🎯 Gợi ý:</b> Thầy chỉ nước nên đi tiếp theo.</li>
+            <li><b>↶ Đi lại:</b> lùi lại để thử nước khác (ván với máy có đi lại sẽ không tính điểm xếp hạng).</li>
+            <li><b>Phân tích cả ván:</b> đánh xong, vào “Ván đã chơi” → chọn ván → “Phân tích cả ván” để xem biểu đồ thế cờ và các nước sai.</li>
+            <li><b>Điểm số:</b> 1 điểm ≈ giá trị 1 con Tốt. “+2.0” nghĩa là bên đó hơn khoảng 2 Tốt.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Luật đi các quân</h3>
+          <ul>
+            <li><b>帥/將 Tướng:</b> đi 1 ô ngang/dọc trong cung. Hai Tướng không được đối mặt trên cùng cột mà không có quân chắn.</li>
+            <li><b>仕/士 Sĩ:</b> đi chéo 1 ô trong cung.</li>
+            <li><b>相/象 Tượng:</b> đi chéo 2 ô, không qua sông, bị chặn nếu có quân ở “mắt Tượng”.</li>
+            <li><b>傌/馬 Mã:</b> đi 1 ô thẳng rồi 1 ô chéo (hình chữ L), bị “cản chân” nếu có quân sát bên.</li>
+            <li><b>俥/車 Xe:</b> đi thẳng bao nhiêu ô cũng được.</li>
+            <li><b>炮/砲 Pháo:</b> đi như Xe, nhưng muốn ăn phải nhảy qua đúng 1 quân (ngòi).</li>
+            <li><b>兵/卒 Tốt:</b> đi thẳng 1 ô; qua sông được đi ngang; không bao giờ đi lùi.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Thắng, thua, hòa</h3>
+          <ul>
+            <li>Chiếu bí, hoặc đối phương hết nước đi hợp lệ → thắng.</li>
+            <li>Chiếu liên tục lặp lại thế cờ (trường chiếu) → bên chiếu bị xử thua.</li>
+            <li>Lặp lại thế cờ 3 lần, 60 nước không ăn quân, hoặc hai bên hết quân tấn công → hòa.</li>
+            <li>Hết giờ hoặc đầu hàng → thua.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Ký hiệu nước đi</h3>
+          <p>Cột đánh số 1–9 từ phải sang trái theo phía mỗi bên. <b>Tấn</b> = tiến, <b>thoái</b> = lui, <b>bình</b> = đi ngang. Ví dụ: <i>Pháo 2 bình 5</i> = Pháo ở cột 2 đi ngang sang cột 5.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Hộp thoại dùng chung -->
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3 id="modal-title"></h3>
+      <div id="modal-body"></div>
+      <div class="btn-row" id="modal-btns"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

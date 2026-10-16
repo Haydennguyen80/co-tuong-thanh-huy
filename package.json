@@ -1,0 +1,11 @@
+{
+  "name": "co-tuong-thanh-huy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cờ Tướng Thanh Huy - PWA đánh cờ tướng, tư vấn nước đi, chơi online qua link",
+  "scripts": {
+    "test": "node tests/perft.test.mjs && node tests/engine.test.mjs && node tests/coach.test.mjs && node tests/puzzles.test.mjs",
+    "start": "python3 -m http.server 8080"
+  }
+}
